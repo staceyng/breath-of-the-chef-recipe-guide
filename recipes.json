@@ -1,0 +1,49 @@
+{
+  "source": "https://www.ign.com/wikis/the-legend-of-zelda-breath-of-the-wild/All_Recipes_and_Cookbook",
+  "any": {
+    "any_meat": ["raw meat", "raw prime meat", "raw gourmet meat"],
+    "any_seafood": ["hyrule bass", "hearty bass", "hearty salmon"]
+  },
+  "recipes": [
+    {
+      "meal_name": "monster soup",
+      "ingredients": [
+        "monster extract",
+        "goat butter",
+        "fresh milk",
+        "tabantha wheat"
+      ],
+      "category": "monster foods"
+    },
+    {
+      "meal_name": "monster curry",
+      "ingredients": ["monster extract", "goron spice", "hylian rice"],
+      "category": "monster foods"
+    },
+    {
+      "meal_name": "monster rice balls",
+      "ingredients": ["monster extract", "hylian rice", "rock salt"],
+      "category": "monster foods"
+    },
+    {
+      "meal_name": "monster rice balls",
+      "ingredients": ["monster extract", "hylian rice", "rock salt"],
+      "category": "monster foods"
+    },
+    {
+      "meal_name": "monster stew",
+      "ingredients": ["monster extract", "any meat", "any seafood"],
+      "category": "monster foods"
+    },
+    {
+      "meal_name": "monster cake",
+      "ingredients": [
+        "monster extract",
+        "cane sugar",
+        "goat butter",
+        "tabantha wheat"
+      ],
+      "category": "monster foods"
+    }
+  ]
+}
