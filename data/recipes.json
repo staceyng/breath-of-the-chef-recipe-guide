@@ -6,7 +6,7 @@
   },
   "recipes": [
     {
-      "meal_name": "monster soup",
+      "name": "monster soup",
       "ingredients": [
         "monster extract",
         "goat butter",
@@ -16,27 +16,27 @@
       "category": "monster foods"
     },
     {
-      "meal_name": "monster curry",
+      "name": "monster curry",
       "ingredients": ["monster extract", "goron spice", "hylian rice"],
       "category": "monster foods"
     },
     {
-      "meal_name": "monster rice balls",
+      "name": "monster rice balls",
       "ingredients": ["monster extract", "hylian rice", "rock salt"],
       "category": "monster foods"
     },
     {
-      "meal_name": "monster rice balls",
+      "name": "monster rice balls",
       "ingredients": ["monster extract", "hylian rice", "rock salt"],
       "category": "monster foods"
     },
     {
-      "meal_name": "monster stew",
+      "name": "monster stew",
       "ingredients": ["monster extract", "any meat", "any seafood"],
       "category": "monster foods"
     },
     {
-      "meal_name": "monster cake",
+      "name": "monster cake",
       "ingredients": [
         "monster extract",
         "cane sugar",

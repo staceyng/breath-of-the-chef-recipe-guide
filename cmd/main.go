@@ -2,6 +2,7 @@ package main
 
 import (
 	"breath-of-the-chef-recipe-guide/handlers"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -16,6 +17,7 @@ func main() {
 
 	// Routes
 	e.GET("/", handlers.HelloWorld)
+	e.GET("/recipes", handlers.GetRecipes)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
