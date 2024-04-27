@@ -11,4 +11,11 @@ repos:
     hooks:
       - id: go-fmt
       - id: go-imports
-      - id: golangci-lint
+  - repo: local
+    hooks:
+      - id: go-lint
+        name: Lint Go code
+        files: \.go$
+        entry: golangci-lint run ./backend/...
+        language: system
+        pass_filenames: false
