@@ -14,7 +14,7 @@ repos:
   - repo: local
     hooks:
       - id: go-lint
-        name: Lint Go code
+        name: go lint
         files: \.go$
         entry: golangci-lint run ./backend/...
         language: system
