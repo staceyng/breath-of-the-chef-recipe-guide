@@ -118,3 +118,52 @@ func GetRecipesByCategory(category string) []RecipeIngredient {
 	log.Printf("[repo] GetRecipesByCategory: %v", riList)
 	return riList
 }
+
+func GetRecipeByNameCateogory(recipeName, category string) []RecipeIngredient {
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password='' dbname=%s sslmode=disable", host, port, user, dbname)
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	// q := "SELECT * FROM categories"
+	q := `
+	SELECT
+		r.name AS recipe_name,
+		r.category AS category,
+		i.name AS ingredient_name
+	FROM
+		recipes r
+	INNER JOIN
+		recipe_ingredients ri ON r.recipe_id = ri.recipe_id
+	INNER JOIN
+		ingredients i ON ri.ingredient_id = i.ingredient_id
+	WHERE
+		r.name = $1 AND r.category = $2
+	`
+
+	rows, err := db.Query(q, recipeName, category)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	var riList = []RecipeIngredient{}
+	for rows.Next() {
+		var rn, c, in string
+		err := rows.Scan(&rn, &c, &in)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ri := RecipeIngredient{
+			RecipeName:     rn,
+			Category:       c,
+			IngredientName: in,
+		}
+		riList = append(riList, ri)
+	}
+
+	log.Printf("[repo] GetRecipesByCategory: %v", riList)
+	return riList
+}
