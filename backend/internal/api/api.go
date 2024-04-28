@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -27,16 +28,23 @@ func GetRecipe(c *gin.Context) {
 
 	var ingredients []string
 	var cat string
+	var recipe Recipe
 	caser := cases.Title(language.English)
-	for _, v := range recipeIngredientList {
-		ingredients = append(ingredients, caser.String(v.IngredientName))
-		cat = v.Category
-	}
 
-	recipe := Recipe{
-		Name:        caser.String(recipeName),
-		Category:    caser.String(cat),
-		Ingredients: ingredients,
+	if len(recipeIngredientList) > 0 {
+		for _, v := range recipeIngredientList {
+			ingredients = append(ingredients, caser.String(v.IngredientName))
+			cat = v.Category
+		}
+		recipe = Recipe{
+			Name:        caser.String(recipeName),
+			Category:    caser.String(cat),
+			Ingredients: ingredients,
+		}
+		c.JSON(http.StatusOK, JsonResponse{Data: recipe})
+	} else {
+		e := ErrorResponse{Code: "recipe_not_found", Title: "Recipe Not Found", Detail: fmt.Sprintf("Unable to find recipe with name '%s'", recipeName)}
+		errors := []ErrorResponse{e}
+		c.JSON(http.StatusNotFound, JsonResponse{Data: nil, Errors: errors})
 	}
-	c.JSON(http.StatusOK, recipe)
 }
