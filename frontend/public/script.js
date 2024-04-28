@@ -2,7 +2,6 @@ const form = document.querySelector("form");
 const searchResultsDiv = document.querySelector("#search-results");
 
 form.addEventListener("submit", async (e) => {
-  console.log("fire submited");
   e.preventDefault();
   let name = document.querySelector("#name").value;
   name = name.replace(" ", "-");
@@ -19,12 +18,10 @@ form.addEventListener("submit", async (e) => {
     headers
   );
   const result = await response.json();
-  console.log(result);
 
   // Update the HTML to display the results
   searchResultsDiv.innerHTML = "";
   const recipe = result.data;
-  console.log(recipe);
   const recipeHTML = `
       <h3>${recipe.name}</h3>
       <p>Category: ${recipe.category}</p>
