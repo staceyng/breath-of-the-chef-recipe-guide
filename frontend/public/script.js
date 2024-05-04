@@ -4,7 +4,7 @@ const searchResultsDiv = document.querySelector("#search-results");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   let name = document.querySelector("#name").value;
-  name = name.replace(" ", "-");
+  name = name.replaceAll(" ", "-");
 
   let headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -23,14 +23,20 @@ form.addEventListener("submit", async (e) => {
   searchResultsDiv.innerHTML = "";
   const recipe = result.data;
   const recipeHTML = `
-      <h3>${recipe.name}</h3>
-      <p>Category: ${recipe.category}</p>
-      <p>Ingredients:</p>
+    <br>
+    <div class="card" style="width: 20rem;">
+      <img src="../src/imgs/${name}.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${recipe.name}</h5>
+        <h5><span class="badge text-bg-secondary">${recipe.category}</span></h5>
+        <p class="card-text">Ingredients</p>
         <ul>
           ${recipe.ingredients
             .map((ingredient) => `<li>${ingredient}</li>`)
             .join("")}
         </ul>
-    `;
+      </div>
+    </div>
+  `;
   searchResultsDiv.innerHTML += recipeHTML;
 });
