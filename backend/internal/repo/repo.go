@@ -21,15 +21,18 @@ type RecipeIngredient struct {
 	IngredientName string `db:"ingredient_name"`
 }
 
+func getDBConnectionStr() string {
+	return fmt.Sprintf("host=%s port=%d user=%s password='' dbname=%s sslmode=disable", host, port, user, dbname)
+}
+
 func GetRecipeByName(name string) []RecipeIngredient {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password='' dbname=%s sslmode=disable", host, port, user, dbname)
+	connStr := getDBConnectionStr()
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// q := "SELECT * FROM categories"
 	q := `
 	SELECT
 		r.name AS recipe_name,
@@ -71,14 +74,13 @@ func GetRecipeByName(name string) []RecipeIngredient {
 }
 
 func GetRecipesByCategory(category string) []RecipeIngredient {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password='' dbname=%s sslmode=disable", host, port, user, dbname)
+	connStr := getDBConnectionStr()
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// q := "SELECT * FROM categories"
 	q := `
 	SELECT
 		r.name AS recipe_name,
@@ -120,14 +122,13 @@ func GetRecipesByCategory(category string) []RecipeIngredient {
 }
 
 func GetRecipeByNameCateogory(recipeName, category string) []RecipeIngredient {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password='' dbname=%s sslmode=disable", host, port, user, dbname)
+	connStr := getDBConnectionStr()
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// q := "SELECT * FROM categories"
 	q := `
 	SELECT
 		r.name AS recipe_name,
@@ -164,6 +165,36 @@ func GetRecipeByNameCateogory(recipeName, category string) []RecipeIngredient {
 		riList = append(riList, ri)
 	}
 
-	log.Printf("[repo] GetRecipesByCategory: %v", riList)
+	log.Printf("[repo] GetRecipesByNameCategory: %v", riList)
 	return riList
+}
+
+func GetAllIngredients() []string {
+	connStr := getDBConnectionStr()
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	q := `SELECT name from ingredients`
+
+	rows, err := db.Query(q)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	var ingredientList = []string{}
+	for rows.Next() {
+		var name string
+		err := rows.Scan(&name)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ingredientList = append(ingredientList, name)
+	}
+
+	log.Printf("[repo] GetAllIngredients: %v", ingredientList)
+	return ingredientList
 }

@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"sort"
 	"strings"
 
 	"golang.org/x/text/cases"
@@ -145,4 +146,10 @@ func getRecipeByRecipeNameCategoryName(c *gin.Context, r, cat string) {
 	}
 
 	c.JSON(http.StatusOK, JsonResponse{Data: recipes})
+}
+
+func GetIngredients(c *gin.Context) {
+	ingredientList := repo.GetAllIngredients()
+	sort.Strings(ingredientList)
+	c.JSON(http.StatusOK, JsonResponse{Data: ingredientList})
 }

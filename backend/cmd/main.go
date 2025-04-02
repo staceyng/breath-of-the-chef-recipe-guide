@@ -12,6 +12,7 @@ func main() {
 
 	r.GET("/ping", api.PingPong)
 	r.GET("/recipes", api.GetRecipe)
+	r.GET("/ingredients", api.GetIngredients)
 
 	err := r.Run()
 	if err != nil {

@@ -4,7 +4,7 @@ INSERT INTO ingredients (ingredient_id, name)
 VALUES
     (1, 'raw meat'),
     (2, 'raw bird drumstick'),
-    (3, 'any seafood'),
+    (3, 'seafood'),
     (4, 'raw bird thigh'),
     (5, 'raw prime meat'),
     (6, 'raw gourmet meat'),
